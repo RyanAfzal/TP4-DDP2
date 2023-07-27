@@ -7,7 +7,7 @@ public class Division {
 
     // TODO: Lengkapi constructor
     public Division(int baseSalary) {
-        
+        this.baseSalary = baseSalary;
     }
 
     // TODO: Lengkapi logika untuk menambahkan karyawan
@@ -16,4 +16,12 @@ public class Division {
     }
 
     // Tambahkan getter & setter lainnya sesuai kebutuhan
+
+    /**
+     * getter untuk mendapatkan division base salary
+     * @return mengembalikan division base salary
+     */
+    public int getBaseSalary(){
+        return baseSalary;
+    }
 }

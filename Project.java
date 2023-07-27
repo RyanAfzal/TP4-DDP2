@@ -8,7 +8,7 @@ public class Project {
 
     // TODO: Lengkapi constructor
     public Project(String name) {
-
+        this.name = name;
     }
 
     // TODO: Lengkapi logika menambahkan anggota proyek

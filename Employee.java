@@ -10,11 +10,14 @@ public class Employee {
 
     // TODO: Lengkapi constructor
     public Employee(String name, int yearsOfExperience, double salaryMultiplier) {
+        this.name = name;
+        this.yearsOfExperience = yearsOfExperience;
+        this.salaryMultiplier = salaryMultiplier;
     }
 
     public int calculateSalary() {
         // TODO Lengkapi logika untuk menghitung gaji
-        return 0;
+        return (division.getBaseSalary()*(1 + this.salaryMultiplier + this.yearsOfExperience /10 ));
     }
 
     public String getDivisionName() {
