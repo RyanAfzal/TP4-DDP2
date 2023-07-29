@@ -5,7 +5,7 @@ public class Project {
     // TODO: Tambahkan modifier untuk atribut
     private String name;
     private Manager projectLeader;
-    private List<Employee> memberList;
+    private List<Employee> memberList = new ArrayList<>();;
 
     // TODO: Lengkapi constructor
     public Project(String name) {
@@ -16,13 +16,17 @@ public class Project {
         return name;
     }
 
+    public Manager getProjectLeader(){
+        return projectLeader;
+    }
+
+    public List<Employee> getMemberList(){
+        return memberList;
+    }
+
     // TODO: Lengkapi logika menambahkan anggota proyek
     public void addMember(Employee employee) {
         boolean sudahAdaManager = false;
-
-        if (memberList == null){
-            this.memberList = new ArrayList<>();
-        }
 
         for (Employee member : memberList){
             if (member instanceof Manager){
@@ -36,12 +40,14 @@ public class Project {
 
         else{
             this.memberList.add(employee);
+            employee.getProjectList().add(this);
         }
     }
 
 
     // TODO: Lengkapi logika menghapus anggota proyek
     public void removeMember(Employee employee) {
-
+        this.memberList.remove(employee);
+        employee.getProjectList().remove(this);
     }
 }

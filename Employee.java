@@ -3,11 +3,11 @@ import java.util.List;
 
 public class Employee {
     // TODO: Tambahkan modifier untuk atribut
-    String name;
-    int yearsOfExperience;
-    int salaryMultiplier;
-    Division division;
-    List<Project> projects = new ArrayList<>();
+    protected String name;
+    protected int yearsOfExperience;
+    protected int salaryMultiplier;
+    protected Division division;
+    protected List<Project> projects = new ArrayList<>();
 
     // TODO: Lengkapi constructor
     public Employee(String name, int yearsOfExperience, double salaryMultiplier) {
@@ -23,12 +23,12 @@ public class Employee {
 
     public String getDivisionName() {
         //TODO: Lengkapi logika untuk mendapat string nama divisi
-        return name;
+        return "";
     }
 
     public String getProjectsString() {
         //TODO: Lengkapi logika untuk mendapat string daftar proyek
-        return projects.get(0).getProjectName();
+        return projects.toString();
     }
 
     public String getName() {

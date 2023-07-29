@@ -2,8 +2,8 @@ import java.util.List;
 
 public class Division {
     // TODO: Tambahkan modifier untuk atribut
-    int baseSalary;
-    List<Employee> employeeList;
+    protected int baseSalary;
+    protected List<Employee> employeeList;
 
     // TODO: Lengkapi constructor
     public Division(int baseSalary) {
