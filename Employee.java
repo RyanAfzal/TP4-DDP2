@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Employee {
@@ -6,13 +7,13 @@ public class Employee {
     int yearsOfExperience;
     int salaryMultiplier;
     Division division;
-    List<Project> projects;
+    List<Project> projects = new ArrayList<>();
 
     // TODO: Lengkapi constructor
     public Employee(String name, int yearsOfExperience, double salaryMultiplier) {
         this.name = name;
         this.yearsOfExperience = yearsOfExperience;
-        this.salaryMultiplier = salaryMultiplier;
+        this.salaryMultiplier = (int) salaryMultiplier;
     }
 
     public int calculateSalary() {
@@ -22,12 +23,12 @@ public class Employee {
 
     public String getDivisionName() {
         //TODO: Lengkapi logika untuk mendapat string nama divisi
-        return "";
+        return name;
     }
 
     public String getProjectsString() {
         //TODO: Lengkapi logika untuk mendapat string daftar proyek
-        return "";
+        return projects.get(0).getProjectName();
     }
 
     public String getName() {
@@ -35,4 +36,8 @@ public class Employee {
     }
 
     // Tambahkan getter & setter lainnya sesuai kebutuhan
+
+    public List<Project> getProjectList(){
+        return projects;
+    }
 }
