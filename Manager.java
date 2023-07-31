@@ -4,9 +4,4 @@ public class Manager extends Employee {
         super(name, yearsOfExperience, salaryMultiplier);
     }
 
-    @Override
-    public String toString() {
-        // TODO
-        return super.toString();
-    }
 }

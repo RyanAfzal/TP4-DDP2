@@ -36,6 +36,7 @@ public class Project {
 
         if (employee instanceof Manager && sudahAdaManager == false){
             this.projectLeader = (Manager) employee;
+            employee.getProjectList().add(this);
         }
 
         else{

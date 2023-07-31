@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class SimProyek {
-    List<Project> projectList = new ArrayList<>();
+    public List<Project> projectList = new ArrayList<>();
     List<Employee> employeeList = new ArrayList<>();
     List<Division> divisionList = new ArrayList<>();
 
@@ -129,13 +129,25 @@ public class SimProyek {
                     System.out.println();
                     break;
                 case 7:
+                    String jabatanKaryawan = "";
                     System.out.println("Daftar karyawan pada sistem SimProyek ");
                     System.out.println("Nama - Divisi - Gaji - Proyek ");
                     for (int i = 0; i < app.employeeList.size(); i++) {
+                        // untuk jabatan
+                        if(app.employeeList.get(i) instanceof Manager){
+                            jabatanKaryawan = "Manager";
+                        }
+                        else if(app.employeeList.get(i) instanceof Intern){
+                            jabatanKaryawan = "Intern";
+                        }
+                        else{
+                            jabatanKaryawan = "Karyawan";
+                        }
+
                         System.out.printf("%d. %s - Divisi %s - %d - %s \n", 
                             i+1, 
                             // TODO: lengkapi logika di masing-masing method
-                            app.employeeList.get(i).getName(),
+                            jabatanKaryawan + " " + app.employeeList.get(i).getName() ,
                             app.employeeList.get(i).getDivisionName(),
                             app.employeeList.get(i).calculateSalary(),
                             app.employeeList.get(i).getProjectsString()
@@ -182,10 +194,31 @@ public class SimProyek {
     }
 
     private void printDivisionDetail(int nomorPilihan) {
-        
+        Division division = divisionList.get(nomorPilihan - 1);
+        System.out.println(division);
+        for (int i = 0; i < division.getEmployeeList().size() ; i++) {
+            System.out.println((i + 1) + ". " + division.getEmployeeList().get(i).toString());
+        }
     }
 
     private void addEmployee(String namaKaryawan, String jabatan, int lamaBekerja, double bonusGaji, int nomorDivisi) {
+        Employee currentEmployee = null;
+
+        if(jabatan.equals("Manager")){
+            currentEmployee = new Manager(namaKaryawan,lamaBekerja,bonusGaji);
+        }
+
+        else if(jabatan.equals("Intern")){
+            currentEmployee = new Intern(namaKaryawan,lamaBekerja,bonusGaji);
+        }
+
+        else if(jabatan.equals("Employee")){
+            currentEmployee = new Manager(namaKaryawan,lamaBekerja,bonusGaji);
+        }
+
+        employeeList.add(currentEmployee);
+        currentEmployee.setDivision(divisionList.get(nomorDivisi-1));
+        divisionList.get(nomorDivisi-1).addEmployee(currentEmployee);
     }
 
     private void printProjectList() {
@@ -197,7 +230,7 @@ public class SimProyek {
             }
 
             else{
-                System.out.println("Leader: " + projectList.get(i).getProjectLeader().getName() + " - Divisi " + projectList.get(i).getProjectLeader().getDivisionName());
+                System.out.println("Leader: " + projectList.get(i).getProjectLeader().getName());
             }
 
             System.out.println("Jumlah anggota: " + projectList.get(i).getMemberList().size());
@@ -274,13 +307,13 @@ public class SimProyek {
                     }
 
                     else{
-                        if (employee.getProjectList().size() == 0){
+                        if (employee.getProjectList().isEmpty()){
                             projectList.get(nomorPilihan-1).addMember(employee);
                             System.out.println("Karyawan " + employee.getName() + " berhasil ditambahkan ke proyek " + projectList.get(nomorPilihan-1).getProjectName());
                         }
 
                         else{
-                            System.out.println("Gagal: Karyawan "+ employee.getName() + " sudah merupakan anggota dari proyek " + projectList.get(nomorPilihan-1).getProjectName());
+                            System.out.println("Gagal: Karyawan "+ employee.getName() + " sudah merupakan anggota dari proyek " + employee.getProjectList().get(0).getProjectName());
                         }
                     }
                 }

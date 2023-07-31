@@ -3,36 +3,69 @@ import java.util.List;
 
 public class Employee {
     // TODO: Tambahkan modifier untuk atribut
-    protected String name;
-    protected int yearsOfExperience;
-    protected int salaryMultiplier;
-    protected Division division;
-    protected List<Project> projects = new ArrayList<>();
+    private String name;
+    private int yearsOfExperience;
+    private double salaryMultiplier;
+    private Division division;
+    private List<Project> projects = new ArrayList<>();
 
     // TODO: Lengkapi constructor
     public Employee(String name, int yearsOfExperience, double salaryMultiplier) {
         this.name = name;
         this.yearsOfExperience = yearsOfExperience;
-        this.salaryMultiplier = (int) salaryMultiplier;
+        this.salaryMultiplier = salaryMultiplier;
     }
 
     public int calculateSalary() {
         // TODO Lengkapi logika untuk menghitung gaji
-        return (division.getBaseSalary()*(1 + this.salaryMultiplier + this.yearsOfExperience /10 ));
+        return (int)(division.getBaseSalary()*(1 + this.salaryMultiplier + this.yearsOfExperience /10 ));
     }
 
     public String getDivisionName() {
         //TODO: Lengkapi logika untuk mendapat string nama divisi
-        return "";
+        return division.getClass().getName();
     }
 
     public String getProjectsString() {
         //TODO: Lengkapi logika untuk mendapat string daftar proyek
-        return projects.toString();
+        String projectString = new String();
+
+        if (projects.size() == 0){
+            return "Tidak ada proyek";
+        }
+
+        else{
+            for (int i = 0 ; i < projects.size() ; i++){
+                projectString += projects.get(i).getProjectName();
+                if (i != projects.size()-1){
+                    projectString += " , ";
+                }
+            }
+
+            return projectString;
+        }
+    }
+
+    @Override
+    public String toString() {
+        String result = "";
+        result += this.getName() + " - ";
+        result += this.calculateSalary() + " - ";
+        if (projects.size() == 0) {
+            result += "Tidak memiliki proyek";
+        } 
+        else {
+            result += this.getProjectsString();
+        }
+        return result;
     }
 
     public String getName() {
         return name;
+    }
+
+    public void setDivision(Division division){
+        this.division = division;
     }
 
     // Tambahkan getter & setter lainnya sesuai kebutuhan
