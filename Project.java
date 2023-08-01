@@ -26,17 +26,16 @@ public class Project {
 
     // TODO: Lengkapi logika menambahkan anggota proyek
     public void addMember(Employee employee) {
-        boolean sudahAdaManager = false;
-
-        for (Employee member : memberList){
-            if (member instanceof Manager){
-                sudahAdaManager = true;
+        if (this.projectLeader == null){
+            if (employee instanceof Manager){
+                this.projectLeader = (Manager) employee;
+                employee.getProjectList().add(this);
             }
-        }
 
-        if (employee instanceof Manager && sudahAdaManager == false){
-            this.projectLeader = (Manager) employee;
-            employee.getProjectList().add(this);
+            else{
+                this.memberList.add(employee);
+                employee.getProjectList().add(this);
+            }
         }
 
         else{

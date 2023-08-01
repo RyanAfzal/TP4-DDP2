@@ -194,31 +194,44 @@ public class SimProyek {
     }
 
     private void printDivisionDetail(int nomorPilihan) {
-        Division division = divisionList.get(nomorPilihan - 1);
-        System.out.println(division);
-        for (int i = 0; i < division.getEmployeeList().size() ; i++) {
-            System.out.println((i + 1) + ". " + division.getEmployeeList().get(i).toString());
+        if (nomorPilihan < 0 || nomorPilihan > projectList.size()){
+            System.out.println("Input invalid. Kembali ke menu utama");
+        }
+
+        else{
+            Division division = divisionList.get(nomorPilihan - 1);
+            System.out.println(division);
+            for (int i = 0; i < division.getEmployeeList().size() ; i++) {
+                System.out.println((i + 1) + ". " + division.getEmployeeList().get(i).toString());
+            }
         }
     }
 
     private void addEmployee(String namaKaryawan, String jabatan, int lamaBekerja, double bonusGaji, int nomorDivisi) {
         Employee currentEmployee = null;
+        if (jabatan.equals("Manager") || jabatan.equals("Intern") || jabatan.equals("Employee")){
 
-        if(jabatan.equals("Manager")){
-            currentEmployee = new Manager(namaKaryawan,lamaBekerja,bonusGaji);
+            if(jabatan.equals("Manager")){
+                currentEmployee = new Manager(namaKaryawan,lamaBekerja,bonusGaji);
+            }
+
+            else if(jabatan.equals("Intern")){
+                currentEmployee = new Intern(namaKaryawan,lamaBekerja,bonusGaji);
+            }
+
+            else if(jabatan.equals("Employee")){
+                currentEmployee = new Manager(namaKaryawan,lamaBekerja,bonusGaji);
+            }
+
+
+            employeeList.add(currentEmployee);
+            currentEmployee.setDivision(divisionList.get(nomorDivisi-1));
+            divisionList.get(nomorDivisi-1).addEmployee(currentEmployee);
         }
 
-        else if(jabatan.equals("Intern")){
-            currentEmployee = new Intern(namaKaryawan,lamaBekerja,bonusGaji);
+        else{
+            System.out.println("Jabatan tidak tersedia");
         }
-
-        else if(jabatan.equals("Employee")){
-            currentEmployee = new Manager(namaKaryawan,lamaBekerja,bonusGaji);
-        }
-
-        employeeList.add(currentEmployee);
-        currentEmployee.setDivision(divisionList.get(nomorDivisi-1));
-        divisionList.get(nomorDivisi-1).addEmployee(currentEmployee);
     }
 
     private void printProjectList() {
@@ -239,25 +252,31 @@ public class SimProyek {
     }
 
     private void projectDetail(int nomorPilihan) {
-        System.out.println(projectList.get(nomorPilihan-1).getProjectName());
-        //Untuk Project Leader
-        if (projectList.get(nomorPilihan-1).getProjectLeader() == null){
-            System.out.println("Leader: Tidak memiliki leader");
+        if (nomorPilihan < 0 || nomorPilihan > projectList.size()){
+            System.out.println("Input invalid");
         }
 
         else{
-            System.out.println("Leader: " + projectList.get(nomorPilihan-1).getProjectLeader().getName() + " - Divisi " + projectList.get(nomorPilihan-1).getProjectLeader().getDivisionName());
-        }
+            System.out.println(projectList.get(nomorPilihan-1).getProjectName());
+            //Untuk Project Leader
+            if (projectList.get(nomorPilihan-1).getProjectLeader() == null){
+                System.out.println("Leader: Tidak memiliki leader");
+            }
 
-        //Untuk anggota
-        if (projectList.get(nomorPilihan-1).getMemberList().size() == 0){
-            System.out.println("Anggota: Tidak memiliki anggota");
-        }
+            else{
+                System.out.println("Leader: " + projectList.get(nomorPilihan-1).getProjectLeader().getName() + " - Divisi " + projectList.get(nomorPilihan-1).getProjectLeader().getDivisionName());
+            }
 
-        else{
-            System.out.println("Anggota: ");
-            for (int i = 0 ; i < projectList.get(nomorPilihan-1).getMemberList().size();i++){
-                System.out.println((i+1) + " " +projectList.get(nomorPilihan-1).getMemberList().get(i).getName() + " - Divisi " + projectList.get(nomorPilihan-1).getMemberList().get(i).getDivisionName());
+            //Untuk anggota
+            if (projectList.get(nomorPilihan-1).getMemberList().size() == 0){
+                System.out.println("Anggota: Tidak memiliki anggota");
+            }
+
+            else{
+                System.out.println("Anggota: ");
+                for (int i = 0 ; i < projectList.get(nomorPilihan-1).getMemberList().size();i++){
+                    System.out.println((i+1) + " " +projectList.get(nomorPilihan-1).getMemberList().get(i).getName() + " - Divisi " + projectList.get(nomorPilihan-1).getMemberList().get(i).getDivisionName());
+                }
             }
         }
     }
@@ -277,10 +296,11 @@ public class SimProyek {
 
     private void addProjectMember(int nomorPilihan, String namaKaryawan) {
         //Asumsi : tidak ada nama karyawan yang sama
+        boolean berhasilAddProjectmmber = false;
+
         if (nomorPilihan < 0 || nomorPilihan > projectList.size()){
             System.out.println("Input invalid. Kembali ke menu utama.");
         }
-
         else{
             for (Employee employee : employeeList){
                 if (employee.getName().equals(namaKaryawan)){
@@ -288,6 +308,7 @@ public class SimProyek {
                         if(employee.getProjectList().size() < 3){
                             projectList.get(nomorPilihan-1).addMember(employee);
                             System.out.println("Karyawan " + employee.getName() + " berhasil ditambahkan ke proyek " + projectList.get(nomorPilihan-1).getProjectName());
+                            berhasilAddProjectmmber = true;
                         }
 
                         else{
@@ -299,6 +320,7 @@ public class SimProyek {
                         if (employee.getProjectList().size() < 2){
                             projectList.get(nomorPilihan-1).addMember(employee);
                             System.out.println("Karyawan " + employee.getName() + " berhasil ditambahkan ke proyek " + projectList.get(nomorPilihan-1).getProjectName());
+                            berhasilAddProjectmmber = true;
                         }
 
                         else{
@@ -310,6 +332,7 @@ public class SimProyek {
                         if (employee.getProjectList().isEmpty()){
                             projectList.get(nomorPilihan-1).addMember(employee);
                             System.out.println("Karyawan " + employee.getName() + " berhasil ditambahkan ke proyek " + projectList.get(nomorPilihan-1).getProjectName());
+                            berhasilAddProjectmmber = true;
                         }
 
                         else{
@@ -317,6 +340,10 @@ public class SimProyek {
                         }
                     }
                 }
+            }
+
+            if (berhasilAddProjectmmber == false){
+                System.out.println("Tidak ada karyawan bernama " + namaKaryawan);
             }
         }
     }
