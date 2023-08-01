@@ -12,6 +12,10 @@ public class Division {
     }
 
     // TODO: Lengkapi logika untuk menambahkan karyawan
+    /**
+     * Method untuk menambahkan karyawan ke divisi
+     * @param employee parameter karyawan
+     */
     public void addEmployee(Employee employee) {
         if(employee instanceof Manager){
             employeeList.add(0, employee);
@@ -32,6 +36,10 @@ public class Division {
         return baseSalary;
     }
 
+    /**
+     * Untuk mendapatkan daftar karyawan
+     * @return mengembalikan daftar karyawan
+     */
     public List<Employee> getEmployeeList(){
         return employeeList;
     }

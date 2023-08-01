@@ -12,18 +12,34 @@ public class Project {
         this.name = name;
     }
 
+    /**
+     * Untuk mendapatkan nama proyek
+     * @return nama proyek
+     */
     public String getProjectName(){
         return name;
     }
 
+    /**
+     * Untuk mendapatkan leader proyek
+     * @return leader proyek
+     */
     public Manager getProjectLeader(){
         return projectLeader;
     }
 
+    /**
+     * Untuk Mendapatkan list member proyek
+     * @return list member proyek
+     */
     public List<Employee> getMemberList(){
         return memberList;
     }
 
+    /**
+     * Untuk menambahkan anggota proyek
+     * @param employee karyawan (calon anggota)
+     */
     // TODO: Lengkapi logika menambahkan anggota proyek
     public void addMember(Employee employee) {
         if (this.projectLeader == null){
@@ -45,6 +61,10 @@ public class Project {
     }
 
 
+    /**
+     * Untuk menghapus member proyek
+     * @param employee karyawan
+     */
     // TODO: Lengkapi logika menghapus anggota proyek
     public void removeMember(Employee employee) {
         this.memberList.remove(employee);

@@ -5,6 +5,9 @@ public class Design extends Division {
     }
     
     @Override
+    /**
+     * Override method menambah karyawan ke divisi design
+     */
     public void addEmployee(Employee employee) {
         super.addEmployee(employee);
         employee.setDivision(this);

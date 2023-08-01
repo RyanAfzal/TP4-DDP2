@@ -5,7 +5,9 @@ public class EmployeeTest {
     @Test
     public void calculateSalaryTest(){
         Employee fira = new Employee("Fira", 1, 0.05);
-        int expectedOutput = 0;
+        Division hrd = new HRD(5000000);
+        hrd.addEmployee(fira);
+        int expectedOutput = 5250000;
         int actualOutput = fira.calculateSalary();
         assertEquals(expectedOutput, actualOutput);
     }

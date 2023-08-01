@@ -5,6 +5,9 @@ public class Engineering extends Division{
     }
     
     @Override
+    /**
+     * Override method menambah karyawan ke divisi Engineering
+     */
     public void addEmployee(Employee employee) {
         super.addEmployee(employee);
         employee.setDivision(this);

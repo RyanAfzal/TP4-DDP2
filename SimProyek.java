@@ -34,6 +34,8 @@ public class SimProyek {
             String jabatan;
             int lamaBekerja;
             double bonusGaji;
+
+            //untuk pilih handle menu
             switch (choice) {
                 case 1:
                     System.out.print("Masukkan nama proyek: ");
@@ -47,7 +49,7 @@ public class SimProyek {
                 case 2:
                     System.out.println("Berikut adalah daftar proyek yang dapat Anda pilih: ");
                     app.printProjectListNumberOnly();
-
+                
                     System.out.print("Pilih nomor proyek: ");
                     nomorPilihan = scanner.nextInt();
                     scanner.nextLine();
@@ -186,6 +188,7 @@ public class SimProyek {
 
     // Silahkan tambahkan method lain yang dirasa dapat membantu
 
+    //Untuk mencetak project yang dapat dipilih
     private void printProjectListNumberOnly() {
         for (int i = 0 ; i < projectList.size() ; i++){
             System.out.println((i+1) + " " + projectList.get(i).getProjectName());
@@ -193,6 +196,7 @@ public class SimProyek {
         System.out.println();
     }
 
+    //Untuk mencetak detail tiap divisi
     private void printDivisionDetail(int nomorPilihan) {
         if (nomorPilihan < 0 || nomorPilihan > projectList.size()){
             System.out.println("Input invalid. Kembali ke menu utama");
@@ -207,6 +211,7 @@ public class SimProyek {
         }
     }
 
+    //Untuk Menambah Karyawan
     private void addEmployee(String namaKaryawan, String jabatan, int lamaBekerja, double bonusGaji, int nomorDivisi) {
         Employee currentEmployee = null;
         if (jabatan.equals("Manager") || jabatan.equals("Intern") || jabatan.equals("Employee")){
@@ -234,6 +239,7 @@ public class SimProyek {
         }
     }
 
+    //Untuk mencetak daftar proyek
     private void printProjectList() {
         for(int i = 0 ; i < projectList.size() ; i++){
             System.out.println(projectList.get(i).getProjectName());
@@ -251,6 +257,7 @@ public class SimProyek {
         }
     }
 
+    //Untuk mencetak detail proyek
     private void projectDetail(int nomorPilihan) {
         if (nomorPilihan < 0 || nomorPilihan > projectList.size()){
             System.out.println("Input invalid");
@@ -281,6 +288,7 @@ public class SimProyek {
         }
     }
 
+    //Untuk menghapus anggota proyek
     private void deleteProjectMember(int nomorPilihan, int nomorAnggota) {
         //Asumsi : tidak ada nama karyawan yang sama
         if (nomorPilihan < 0 || nomorPilihan > projectList.size()){
@@ -294,6 +302,7 @@ public class SimProyek {
         }
     }
 
+    //Untuk menambah anggota proyek
     private void addProjectMember(int nomorPilihan, String namaKaryawan) {
         //Asumsi : tidak ada nama karyawan yang sama
         boolean berhasilAddProjectmmber = false;
@@ -348,6 +357,7 @@ public class SimProyek {
         }
     }
 
+    //Untuk membuat proyek
     private void createProject(String projectName) {
         boolean projectSudahada = false;
         for (Project project : projectList){
@@ -366,6 +376,7 @@ public class SimProyek {
         }
     }
 
+    //Untuk print menu yang tersedia
     private void printMenu() {
         System.out.println("Menu:");
         System.out.println("1. Tambah proyek        ");
@@ -379,7 +390,7 @@ public class SimProyek {
         System.out.println("99. Keluar              ");
         System.out.print("Pilih menu: ");
     }
-
+    
     private void mockDivisionData() {
         Division hrd = new HRD(5000000);
         Division marketing = new Marketing(7000000);

@@ -5,6 +5,9 @@ public class HRD extends Division {
     }
 
     @Override
+    /**
+     * Override method menambah karyawan ke divisi HRD
+     */
     public void addEmployee(Employee employee) {
         super.addEmployee(employee);
         employee.setDivision(this);

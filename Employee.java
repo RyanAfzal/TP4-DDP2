@@ -16,16 +16,28 @@ public class Employee {
         this.salaryMultiplier = salaryMultiplier;
     }
 
+    /**
+     * Untuk menghitung gaji
+     * @return gaji yang telah dihitung
+     */
     public int calculateSalary() {
         // TODO Lengkapi logika untuk menghitung gaji
         return (int)(division.getBaseSalary()*(1 + this.salaryMultiplier + this.yearsOfExperience /10 ));
     }
 
+    /**
+     * Untuk mendapatkan nama divisi
+     * @return nama divisi
+     */
     public String getDivisionName() {
         //TODO: Lengkapi logika untuk mendapat string nama divisi
         return division.getClass().getName();
     }
 
+    /**
+     * Untuk persiapan mencetak proyek yang dikerjakan karyawan
+     * @return proyek - proyek yang dikerjakan karyawan
+     */
     public String getProjectsString() {
         //TODO: Lengkapi logika untuk mendapat string daftar proyek
         String projectString = new String();
@@ -60,16 +72,28 @@ public class Employee {
         return result;
     }
 
+    /**
+     * Untuk mendapatkan nama karyawan
+     * @return nama karyawan
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Untuk set divisi karyawan
+     * @param division divisi karyawan
+     */
     public void setDivision(Division division){
         this.division = division;
     }
 
     // Tambahkan getter & setter lainnya sesuai kebutuhan
 
+    /**
+     * Untuk mendapatkan daftar proyek karyawan
+     * @return daftar proyek karyawan
+     */
     public List<Project> getProjectList(){
         return projects;
     }
